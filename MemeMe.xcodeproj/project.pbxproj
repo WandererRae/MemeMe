@@ -8,20 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		FBA4C46720374748008B8FDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA4C46620374748008B8FDA /* AppDelegate.swift */; };
-		FBA4C46920374748008B8FDA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA4C46820374748008B8FDA /* ViewController.swift */; };
+		FBA4C46920374748008B8FDA /* MemeEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA4C46820374748008B8FDA /* MemeEditorViewController.swift */; };
 		FBA4C46C20374748008B8FDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBA4C46A20374748008B8FDA /* Main.storyboard */; };
 		FBA4C46E20374748008B8FDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBA4C46D20374748008B8FDA /* Assets.xcassets */; };
 		FBA4C47120374748008B8FDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBA4C46F20374748008B8FDA /* LaunchScreen.storyboard */; };
+		FBBE6FF720619FC8001F3018 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBE6FF620619FC8001F3018 /* Meme.swift */; };
+		FBBE6FF92061A129001F3018 /* SavedMemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBE6FF82061A129001F3018 /* SavedMemes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FBA4C46320374748008B8FDA /* MemeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBA4C46620374748008B8FDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FBA4C46820374748008B8FDA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FBA4C46820374748008B8FDA /* MemeEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeEditorViewController.swift; sourceTree = "<group>"; };
 		FBA4C46B20374748008B8FDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FBA4C46D20374748008B8FDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FBA4C47020374748008B8FDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FBA4C47220374748008B8FDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FBBE6FF620619FC8001F3018 /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
+		FBBE6FF82061A129001F3018 /* SavedMemes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedMemes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +59,9 @@
 			isa = PBXGroup;
 			children = (
 				FBA4C46620374748008B8FDA /* AppDelegate.swift */,
-				FBA4C46820374748008B8FDA /* ViewController.swift */,
+				FBA4C46820374748008B8FDA /* MemeEditorViewController.swift */,
+				FBBE6FF620619FC8001F3018 /* Meme.swift */,
+				FBBE6FF82061A129001F3018 /* SavedMemes.swift */,
 				FBA4C46A20374748008B8FDA /* Main.storyboard */,
 				FBA4C46D20374748008B8FDA /* Assets.xcassets */,
 				FBA4C46F20374748008B8FDA /* LaunchScreen.storyboard */,
@@ -136,7 +142,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBA4C46920374748008B8FDA /* ViewController.swift in Sources */,
+				FBBE6FF720619FC8001F3018 /* Meme.swift in Sources */,
+				FBBE6FF92061A129001F3018 /* SavedMemes.swift in Sources */,
+				FBA4C46920374748008B8FDA /* MemeEditorViewController.swift in Sources */,
 				FBA4C46720374748008B8FDA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
