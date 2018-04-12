@@ -306,22 +306,16 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         return finishedMeme!
     }
     
-    private func generateNewMemeIdentity() {
-        
+    private func generateNewMemeIdentity() -> String {
+        return String(Date.timeIntervalSinceReferenceDate)
     }
     
     @IBAction func save(_ sender: UIBarButtonItem? = nil) {
-        
-        if currentMemeIdentity == nil { //create a new meme
-            generateNewMemeIdentity()
-            SavedMemes.allSavedMemes.append(Meme(memeUniqueIdentity: currentMemeIdentity, topMemeText: topTextField.text, bottomMemeText: bottomTextField.text, originalImage: memeImageView.image!, finishedMeme: finishedMeme))
-        } else { //edit existing meme
-            SavedMemes.allSavedMemes.index(at: memeUni currentMemeIdentity )()
+        if currentMemeIdentity == nil { //create a new meme identity
+            currentMemeIdentity = generateNewMemeIdentity()
         }
         
-
-        
-//        _ = Meme.init(memeUniqueIdentity: currentMemeIdentity, topMemeText: topTextField.text, bottomMemeText: bottomTextField.text, originalImage: memeImageView.image!, finishedMeme: finishedMeme)
+        _ = Meme.init(memeUniqueIdentity: currentMemeIdentity!, topMemeText: topTextField.text!, bottomMemeText: bottomTextField.text!, originalImageData: UIImageJPEGRepresentation(memeImageView.image!, 1.0)!, finishedMemeImageData: UIImageJPEGRepresentation(generateFinishedMeme(), 1.0)!)
     }
     
 }
@@ -337,3 +331,4 @@ extension UIView {
         return image
     }
 }
+
