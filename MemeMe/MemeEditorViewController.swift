@@ -18,7 +18,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var memeView: UIView!
     
     private(set) var finishedMeme: UIImage?
-
+    
 
     // Buttons
     @IBOutlet weak var toolbar: UIToolbar!
@@ -28,7 +28,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
     
     @IBOutlet weak var resetMemeView: UIBarButtonItem!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var saveButton: UIBarButtonItem! {
+        didSet {
+            if memeImageView != nil {
+                saveButton.isEnabled = true
+            } else {
+                saveButton.isEnabled = false
+            }
+        }
+    }
     @IBOutlet weak var shareButton: UIBarButtonItem! {
         didSet {
             if memeImageView != nil {
@@ -116,7 +124,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBAction func shareMyMeme() {
         
-        finishedMeme = generateFinishedMeme()
+        generateFinishedMeme()
         
         let shareController = UIActivityViewController(activityItems: [finishedMeme!], applicationActivities: nil)
         
@@ -300,10 +308,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // MARK: Finish the meme
     
-    private func generateFinishedMeme() -> UIImage {
+    private func generateFinishedMeme() {
         
         finishedMeme = memeView.snapshot
-        return finishedMeme!
     }
     
     private func generateNewMemeIdentity() -> String {
@@ -311,11 +318,21 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     @IBAction func save(_ sender: UIBarButtonItem? = nil) {
-        if currentMemeIdentity == nil { //create a new meme identity
-            currentMemeIdentity = generateNewMemeIdentity()
-        }
         
-        _ = Meme.init(memeUniqueIdentity: currentMemeIdentity!, topMemeText: topTextField.text!, bottomMemeText: bottomTextField.text!, originalImageData: UIImageJPEGRepresentation(memeImageView.image!, 1.0)!, finishedMemeImageData: UIImageJPEGRepresentation(generateFinishedMeme(), 1.0)!)
+//        currentMemeIdentity = generateNewMemeIdentity()
+        generateFinishedMeme()
+        
+        let newMeme = Meme.init(
+//            memeUniqueIdentity: currentMemeIdentity!,
+            topMemeText: topTextField.text!,
+            bottomMemeText: bottomTextField.text!,
+            originalImageData: UIImageJPEGRepresentation(memeImageView.image!, 1.0)!,
+            originalImage: memeImageView.image!,
+            finishedMemeImageData: UIImageJPEGRepresentation(finishedMeme!, 1.0)!,
+            finishedMemeImage: finishedMeme!
+        )
+        
+        SavedMemes.allSavedMemes.append(newMeme)
     }
     
 }
