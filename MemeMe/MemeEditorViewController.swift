@@ -13,53 +13,37 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // MARK: Meme Editor Definitions
     
-    // Meme Image
+    // Storyboard
+    
+    @IBOutlet weak var entireMemeView: UIView!
+    
     @IBOutlet weak var memeImageView: UIImageView!
-    @IBOutlet weak var memeView: UIView!
-    
-    private(set) var finishedMeme: UIImage?
-    
-
-    // Buttons
-    @IBOutlet weak var toolbar: UIToolbar!
-
-    @IBOutlet weak var cameraButton: UIBarButtonItem!
-    @IBOutlet weak var photoLibraryButton: UIBarButtonItem!
-
-    
-    @IBOutlet weak var resetMemeView: UIBarButtonItem!
-    @IBOutlet weak var saveButton: UIBarButtonItem! {
-        didSet {
-            if memeImageView != nil {
-                saveButton.isEnabled = true
-            } else {
-                saveButton.isEnabled = false
-            }
-        }
-    }
-    @IBOutlet weak var shareButton: UIBarButtonItem! {
-        didSet {
-            if memeImageView != nil {
-                shareButton.isEnabled = true
-            } else {
-                shareButton.isEnabled = false
-            }
-        }
-    }
-    
-    
-    // Text Fields
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     
-    private var defaultTopText: String = "TOP"
-    private var defaultBottomText: String = "BOTTOM"
+    @IBOutlet weak var toolbar: UIToolbar!
+    @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var photoLibraryButton: UIBarButtonItem!
     
-    // Navigation
-    private let imagePickerController = UIImagePickerController()
+    
+    @IBOutlet weak var resetMemeView: UIBarButtonItem!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
+
+
     
     // Other
-    var currentMemeIdentity: String?
+    
+    private(set) var finishedMeme: UIImage?
+    
+    public var originalImage: UIImage?
+    
+    public var defaultTopText: String = "TOP"
+    public var defaultBottomText: String = "BOTTOM"
+    
+    private let imagePickerController = UIImagePickerController()
+    
+    public var currentMemeIdentity: Int?
     
     
     
@@ -71,14 +55,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         topTextField.delegate = self
         bottomTextField.delegate = self
         
-        updateMemeTextAttributes(topTextField)
-        updateMemeTextAttributes(bottomTextField)
+        updateTextFields()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        enableButtons()
         
         subscribeToKeyboardNotifications()
     }
@@ -110,6 +93,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         textField.defaultTextAttributes = memeTextAttributes
     }
     
+    private func updateTextFields() {
+        
+        updateMemeTextAttributes(topTextField)
+        updateMemeTextAttributes(bottomTextField)
+        
+        topTextField.text = defaultTopText
+        bottomTextField.text = defaultBottomText
+    }
+
     
     
     // MARK: Navigation Bar
@@ -120,6 +112,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         topTextField.text = defaultTopText
         bottomTextField.text = defaultBottomText
+        
+        enableButtons()
     }
     
     @IBAction func shareMyMeme() {
@@ -135,6 +129,70 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             if completed {
                 self.save()
             }
+        }
+    }
+    
+    private func enableButtons() {
+        if memeImageView.image != nil {
+            shareButton.isEnabled = true
+            saveButton.isEnabled = true
+        } else {
+            shareButton.isEnabled = false
+            saveButton.isEnabled = false
+        }
+        cameraButton?.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+    }
+    
+    
+    
+    // MARK: Finish the meme
+    
+    private func generateFinishedMeme() {
+        
+        finishedMeme = entireMemeView.snapshot
+    }
+    
+    private func generateNewMemeIdentity() -> String {
+        return String(Date.timeIntervalSinceReferenceDate)
+    }
+    
+    @IBAction func save(_ sender: UIBarButtonItem? = nil) {
+        
+        generateFinishedMeme()
+        
+        if currentMemeIdentity != nil && sender !== UIBarButtonItem() {
+            
+            let saveExistingMeme = Meme.init(
+                topMemeText: topTextField.text!,
+                bottomMemeText: bottomTextField.text!,
+                originalImageData: UIImageJPEGRepresentation(memeImageView.image!, 1.0)!,
+                originalImage: memeImageView.image!,
+                finishedMemeImageData: UIImageJPEGRepresentation(finishedMeme!, 1.0)!,
+                finishedMemeImage: finishedMeme!
+            )
+            
+            print("total memes = \(SavedMemes.allSavedMemes.count)")
+            
+            SavedMemes.allSavedMemes[currentMemeIdentity!] = saveExistingMeme
+            
+            print("saveExistingMeme, total memes = \(SavedMemes.allSavedMemes.count)")
+            
+        } else { // User chose to edit an existing meme and tapped "Save" (not "Share")
+            
+            let newMeme = Meme.init(
+                topMemeText: topTextField.text!,
+                bottomMemeText: bottomTextField.text!,
+                originalImageData: UIImageJPEGRepresentation(memeImageView.image!, 1.0)!,
+                originalImage: memeImageView.image!,
+                finishedMemeImageData: UIImageJPEGRepresentation(finishedMeme!, 1.0)!,
+                finishedMemeImage: finishedMeme!
+            )
+
+            print("total memes = \(SavedMemes.allSavedMemes.count)")
+
+            SavedMemes.allSavedMemes.append(newMeme)
+            
+            print("saveNewMeme, total memes = \(SavedMemes.allSavedMemes.count)")
         }
     }
     
@@ -199,7 +257,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     
     
-    //MARK: Image Picker
+    //MARK: Image Picker Protocol
     
     private func addImageFromSource(_ sourceType: UIImagePickerControllerSourceType){
         
@@ -253,7 +311,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         if topTextField.isFirstResponder {
             
-            if topTextField.text == defaultTopText {
+            if topTextField.text == "TOP" {
                 topTextField.text = ""
             }
         }
@@ -262,7 +320,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             
             view.frame.origin.y = -getKeyboardHeight(notification)
             
-            if bottomTextField.text == defaultBottomText {
+            if bottomTextField.text == "BOTTOM" {
                 bottomTextField.text = ""
             }
         }
@@ -303,38 +361,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
-    
-
-    
-    // MARK: Finish the meme
-    
-    private func generateFinishedMeme() {
-        
-        finishedMeme = memeView.snapshot
-    }
-    
-    private func generateNewMemeIdentity() -> String {
-        return String(Date.timeIntervalSinceReferenceDate)
-    }
-    
-    @IBAction func save(_ sender: UIBarButtonItem? = nil) {
-        
-//        currentMemeIdentity = generateNewMemeIdentity()
-        generateFinishedMeme()
-        
-        let newMeme = Meme.init(
-//            memeUniqueIdentity: currentMemeIdentity!,
-            topMemeText: topTextField.text!,
-            bottomMemeText: bottomTextField.text!,
-            originalImageData: UIImageJPEGRepresentation(memeImageView.image!, 1.0)!,
-            originalImage: memeImageView.image!,
-            finishedMemeImageData: UIImageJPEGRepresentation(finishedMeme!, 1.0)!,
-            finishedMemeImage: finishedMeme!
-        )
-        
-        SavedMemes.allSavedMemes.append(newMeme)
-    }
-    
 }
 
 

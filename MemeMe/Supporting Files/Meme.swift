@@ -47,16 +47,16 @@ struct Meme {
 //    }
     
     init (
-//        memeUniqueIdentity: String,
         topMemeText: String,
         bottomMemeText: String,
+        
         originalImageData: Data,
         originalImage: UIImage,
+        
         finishedMemeImageData: Data,
         finishedMemeImage: UIImage
         ) {
         
-//        self.memeUniqueIdentity = memeUniqueIdentity
         self.topMemeText = topMemeText
         self.bottomMemeText = bottomMemeText
         self.originalImageData = originalImageData
