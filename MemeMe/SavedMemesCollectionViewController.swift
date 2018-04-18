@@ -8,74 +8,68 @@
 
 import UIKit
 
-private let reuseIdentifier = "SavedMemeCell"
-
 class SavedMemesCollectionViewController: UICollectionViewController {
     
-
     @IBOutlet weak var createNewMemeButton: UIBarButtonItem!
     
-    private var selectedMeme: Meme?
     
     
     // MARK: View Lifecycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        print(SavedMemes.allSavedMemes.count)
-
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView?.reloadData()
     }
 
     
-
+    
     // MARK: - Navigation
     
     @IBAction func createNewMeme(_ sender: UIBarButtonItem) {
+        
         performSegue(withIdentifier: "ShowMemeEditor", sender: createNewMemeButton)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowMemeEditor" {
-            if (sender as? Meme) != nil { // The only way to get to this is by selecting a meme
-                if let memeEditor = (segue.destination as? MemeEditorViewController) {
-                    memeEditor.originalImage = selectedMeme?.originalImage
-                    memeEditor.defaultTopText = (selectedMeme?.topMemeText)!
-                    memeEditor.defaultBottomText = (selectedMeme?.bottomMemeText)!
+        
+        if segue.identifier == "ShowMemeDetail" {
+            
+            if let selectedMeme = sender as? Meme {
+                
+                if let memeDetailController = segue.destination as? MemeDetailViewController {
+                    
+                    memeDetailController.meme = selectedMeme
                 }
             }
         }
     }
 
 
-    // MARK: UICollectionViewDataSource
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-
     
-    // MARK: CollectionView Protocol
+    // MARK: - Collection view protocols
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return SavedMemes.allSavedMemes.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedMemeCell", for: indexPath)
-            
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavedMemeCollectionViewCell", for: indexPath)
+
         if let memeCell = cell as? SavedMemeCollectionViewCell {
+
             memeCell.savedMemeImageView.image = SavedMemes.allSavedMemes[indexPath.item].finishedMemeImage
         }
-        
+
         return cell
     }
 
     // MARK: UICollectionViewDelegate
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedMeme = SavedMemes.allSavedMemes[indexPath.item]
-        performSegue(withIdentifier: "ShowMemeEditor", sender: selectedMeme)
+        
+        performSegue(withIdentifier: "ShowMemeDetail", sender: SavedMemes.allSavedMemes[indexPath.item])
     }
 }

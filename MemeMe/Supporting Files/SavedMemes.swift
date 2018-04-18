@@ -9,5 +9,6 @@
 import Foundation
 
 struct SavedMemes {
+    
     static var allSavedMemes = [Meme]()
 }

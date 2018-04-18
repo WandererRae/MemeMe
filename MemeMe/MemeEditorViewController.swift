@@ -25,10 +25,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var photoLibraryButton: UIBarButtonItem!
     
-    
-    @IBOutlet weak var resetMemeView: UIBarButtonItem!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
-    @IBOutlet weak var shareButton: UIBarButtonItem!
+        @IBOutlet weak var shareButton: UIBarButtonItem!
 
 
     
@@ -42,8 +39,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     public var defaultBottomText: String = "BOTTOM"
     
     private let imagePickerController = UIImagePickerController()
-    
-    public var currentMemeIdentity: Int?
     
     
     
@@ -106,16 +101,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // MARK: Navigation Bar
     
-    @IBAction func resetMemeEditor() {
-        
-        memeImageView.image = nil
-        
-        topTextField.text = defaultTopText
-        bottomTextField.text = defaultBottomText
-        
-        enableButtons()
-    }
-    
     @IBAction func shareMyMeme() {
         
         generateFinishedMeme()
@@ -133,13 +118,16 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     private func enableButtons() {
+        
         if memeImageView.image != nil {
+            
             shareButton.isEnabled = true
-            saveButton.isEnabled = true
+            
         } else {
+            
             shareButton.isEnabled = false
-            saveButton.isEnabled = false
         }
+        
         cameraButton?.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
     }
     
@@ -156,44 +144,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         return String(Date.timeIntervalSinceReferenceDate)
     }
     
-    @IBAction func save(_ sender: UIBarButtonItem? = nil) {
+    func save() {
         
         generateFinishedMeme()
         
-        if currentMemeIdentity != nil && sender !== UIBarButtonItem() {
-            
-            let saveExistingMeme = Meme.init(
-                topMemeText: topTextField.text!,
-                bottomMemeText: bottomTextField.text!,
-                originalImageData: UIImageJPEGRepresentation(memeImageView.image!, 1.0)!,
-                originalImage: memeImageView.image!,
-                finishedMemeImageData: UIImageJPEGRepresentation(finishedMeme!, 1.0)!,
-                finishedMemeImage: finishedMeme!
-            )
-            
-            print("total memes = \(SavedMemes.allSavedMemes.count)")
-            
-            SavedMemes.allSavedMemes[currentMemeIdentity!] = saveExistingMeme
-            
-            print("saveExistingMeme, total memes = \(SavedMemes.allSavedMemes.count)")
-            
-        } else { // User chose to edit an existing meme and tapped "Save" (not "Share")
-            
-            let newMeme = Meme.init(
-                topMemeText: topTextField.text!,
-                bottomMemeText: bottomTextField.text!,
-                originalImageData: UIImageJPEGRepresentation(memeImageView.image!, 1.0)!,
-                originalImage: memeImageView.image!,
-                finishedMemeImageData: UIImageJPEGRepresentation(finishedMeme!, 1.0)!,
-                finishedMemeImage: finishedMeme!
-            )
-
-            print("total memes = \(SavedMemes.allSavedMemes.count)")
+            let newMeme = Meme.init(topMemeText: topTextField.text!, bottomMemeText: bottomTextField.text!, originalImage: memeImageView.image!, finishedMemeImage: finishedMeme!)
 
             SavedMemes.allSavedMemes.append(newMeme)
-            
-            print("saveNewMeme, total memes = \(SavedMemes.allSavedMemes.count)")
-        }
     }
     
     
@@ -311,7 +268,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         if topTextField.isFirstResponder {
             
-            if topTextField.text == "TOP" {
+            if topTextField.text == defaultTopText {
                 topTextField.text = ""
             }
         }
@@ -320,7 +277,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             
             view.frame.origin.y = -getKeyboardHeight(notification)
             
-            if bottomTextField.text == "BOTTOM" {
+            if bottomTextField.text == defaultBottomText {
                 bottomTextField.text = ""
             }
         }
