@@ -25,7 +25,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var photoLibraryButton: UIBarButtonItem!
     
-        @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
 
 
     
@@ -100,6 +101,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     
     // MARK: Navigation Bar
+    
+    @IBAction func cancelMemeCreation(_ sender: UIBarButtonItem) {
+
+        self.dismiss(animated: true)
+    }
     
     @IBAction func shareMyMeme() {
         
@@ -220,7 +226,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         imagePickerController.modalPresentationStyle = .currentContext
         imagePickerController.delegate = self
-        imagePickerController.allowsEditing = true
+        imagePickerController.allowsEditing = false
         
         switch sourceType {
             
@@ -238,7 +244,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func imagePickerController (_ imagePickerController:UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]){
         
-        if let selectedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+        if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
             memeImageView.image = selectedImage
         }

@@ -21,22 +21,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4sI-3I-vBn">
-                                <rect key="frame" x="137.66666666666666" y="356.33333333333331" width="100" height="100"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="658"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IVd-3P-RvQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="IVd-3P-RvQ" secondAttribute="height" multiplier="1:1" id="pWI-99-hLW"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="syP-AK-ZTR"/>
-                                        </constraints>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="658"/>
                                     </imageView>
                                     <textField contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" usesAttributedText="YES" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Koo-DR-D4S">
-                                        <rect key="frame" x="0.33333333333334281" y="-0.33333333333331439" width="100" height="21"/>
+                                        <rect key="frame" x="0.33333333333334281" y="-0.3333333333333286" width="375" height="21"/>
                                         <attributedString key="attributedText"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" returnKeyType="done"/>
                                     </textField>
                                     <textField contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" usesAttributedText="YES" adjustsFontForContentSizeCategory="YES" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nkz-DI-mTC">
-                                        <rect key="frame" x="0.33333333333334281" y="79" width="100" height="21"/>
+                                        <rect key="frame" x="0.33333333333334281" y="637" width="375" height="21"/>
                                         <attributedString key="attributedText"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" returnKeyType="done"/>
                                     </textField>
@@ -79,17 +75,22 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="4sI-3I-vBn" firstAttribute="width" relation="lessThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="width" id="4Cj-sI-9EK"/>
                             <constraint firstItem="haL-A5-54h" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="4jK-gD-qDO"/>
                             <constraint firstItem="haL-A5-54h" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="6cI-1H-xt7"/>
-                            <constraint firstItem="4sI-3I-vBn" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="8F7-0p-MLp"/>
-                            <constraint firstItem="4sI-3I-vBn" firstAttribute="height" relation="lessThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="height" id="Wro-py-OwE"/>
+                            <constraint firstItem="haL-A5-54h" firstAttribute="top" secondItem="4sI-3I-vBn" secondAttribute="bottom" id="Cqg-iD-bUB"/>
+                            <constraint firstItem="4sI-3I-vBn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Flk-UA-sgc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4sI-3I-vBn" secondAttribute="trailing" id="aS7-2b-45v"/>
                             <constraint firstItem="haL-A5-54h" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="d4B-uB-OzV"/>
-                            <constraint firstItem="4sI-3I-vBn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xyt-Rq-cbP"/>
+                            <constraint firstItem="4sI-3I-vBn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="dkr-1i-qRY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="hio-Xs-PKg">
+                    <navigationItem key="navigationItem" id="hio-Xs-PKg">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Lvh-o2-sIL">
+                            <connections>
+                                <action selector="cancelMemeCreation:" destination="BYZ-38-t0r" id="11n-Oz-h5a"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="3i0-37-KO8">
                             <connections>
                                 <action selector="shareMyMeme" destination="BYZ-38-t0r" id="Wh2-1c-egR"/>
@@ -99,6 +100,7 @@
                     <connections>
                         <outlet property="bottomTextField" destination="nkz-DI-mTC" id="app-9Y-5hi"/>
                         <outlet property="cameraButton" destination="Zip-RP-Rez" id="XAY-ZO-ssv"/>
+                        <outlet property="cancelButton" destination="Lvh-o2-sIL" id="Ngx-z5-OcR"/>
                         <outlet property="entireMemeView" destination="4sI-3I-vBn" id="RTK-WN-TTp"/>
                         <outlet property="memeImageView" destination="IVd-3P-RvQ" id="X24-pc-KVl"/>
                         <outlet property="photoLibraryButton" destination="tim-Ta-cf5" id="9Lx-he-lVN"/>
@@ -109,7 +111,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1286" y="-579"/>
+            <point key="canvasLocation" x="2401" y="-579"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="p0N-47-OI9">
@@ -184,7 +186,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="jcm-gv-nZ6">
                             <connections>
                                 <action selector="createNewMeme:" destination="ZVd-aU-xQ7" id="55m-lc-hlS"/>
-                                <segue destination="BYZ-38-t0r" kind="show" identifier="ShowMemeEditor" id="XKG-jN-KHu"/>
+                                <segue destination="ekf-vf-Vch" kind="presentation" identifier="ShowMemeEditor" id="XKG-jN-KHu"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -277,7 +279,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="KMY-6g-sIc">
                             <connections>
                                 <action selector="createNewMeme:" destination="8pd-J4-dho" id="t1h-jP-lQf"/>
-                                <segue destination="BYZ-38-t0r" kind="show" id="2rw-6b-UiX"/>
+                                <segue destination="ekf-vf-Vch" kind="presentation" identifier="ShowMemeEditor" id="2rw-6b-UiX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -328,13 +330,34 @@
             </objects>
             <point key="canvasLocation" x="-1340" y="225"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ECp-fK-ux5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ekf-vf-Vch" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wVd-6Z-hDE">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="des-28-iry">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Udr-4p-RNr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v0O-Sw-gkQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1286" y="-579"/>
+        </scene>
     </scenes>
     <resources>
         <image name="collection" width="29" height="30"/>
         <image name="table" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cgn-rt-E7R"/>
         <segue reference="XKG-jN-KHu"/>
+        <segue reference="cgn-rt-E7R"/>
     </inferredMetricsTieBreakers>
 </document>
