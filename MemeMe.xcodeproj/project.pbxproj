@@ -10,8 +10,12 @@
 		113326CD2080FDCE006540BA /* SavedMemesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113326CC2080FDCE006540BA /* SavedMemesCollectionViewController.swift */; };
 		113326CF2080FDE4006540BA /* SavedMemesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113326CE2080FDE4006540BA /* SavedMemesTableViewController.swift */; };
 		113326D120810A8F006540BA /* SavedMemeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113326D020810A8F006540BA /* SavedMemeCollectionViewCell.swift */; };
+<<<<<<< Updated upstream
 		119D7CE82087C25A0059287F /* SavedMemeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119D7CE72087C25A0059287F /* SavedMemeTableViewCell.swift */; };
 		119D7CEA2087E8640059287F /* MemeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119D7CE92087E8640059287F /* MemeDetailViewController.swift */; };
+=======
+		FB7441102086CA8100A0AA9F /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB74410F2086CA8100A0AA9F /* CollectionViewController.swift */; };
+>>>>>>> Stashed changes
 		FBA4C46720374748008B8FDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA4C46620374748008B8FDA /* AppDelegate.swift */; };
 		FBA4C46920374748008B8FDA /* MemeEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA4C46820374748008B8FDA /* MemeEditorViewController.swift */; };
 		FBA4C46C20374748008B8FDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBA4C46A20374748008B8FDA /* Main.storyboard */; };
@@ -25,8 +29,12 @@
 		113326CC2080FDCE006540BA /* SavedMemesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedMemesCollectionViewController.swift; sourceTree = "<group>"; };
 		113326CE2080FDE4006540BA /* SavedMemesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedMemesTableViewController.swift; sourceTree = "<group>"; };
 		113326D020810A8F006540BA /* SavedMemeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedMemeCollectionViewCell.swift; sourceTree = "<group>"; };
+<<<<<<< Updated upstream
 		119D7CE72087C25A0059287F /* SavedMemeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedMemeTableViewCell.swift; sourceTree = "<group>"; };
 		119D7CE92087E8640059287F /* MemeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeDetailViewController.swift; sourceTree = "<group>"; };
+=======
+		FB74410F2086CA8100A0AA9F /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+>>>>>>> Stashed changes
 		FBA4C46320374748008B8FDA /* MemeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBA4C46620374748008B8FDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FBA4C46820374748008B8FDA /* MemeEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeEditorViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +92,7 @@
 			children = (
 				FBA4C46820374748008B8FDA /* MemeEditorViewController.swift */,
 				113326CC2080FDCE006540BA /* SavedMemesCollectionViewController.swift */,
+				FB74410F2086CA8100A0AA9F /* CollectionViewController.swift */,
 				113326CE2080FDE4006540BA /* SavedMemesTableViewController.swift */,
 				119D7CE92087E8640059287F /* MemeDetailViewController.swift */,
 				FBA4C46A20374748008B8FDA /* Main.storyboard */,
@@ -171,6 +180,7 @@
 				113326CD2080FDCE006540BA /* SavedMemesCollectionViewController.swift in Sources */,
 				FBBE6FF92061A129001F3018 /* SavedMemes.swift in Sources */,
 				FBA4C46920374748008B8FDA /* MemeEditorViewController.swift in Sources */,
+				FB7441102086CA8100A0AA9F /* CollectionViewController.swift in Sources */,
 				113326D120810A8F006540BA /* SavedMemeCollectionViewCell.swift in Sources */,
 				FBA4C46720374748008B8FDA /* AppDelegate.swift in Sources */,
 				113326CF2080FDE4006540BA /* SavedMemesTableViewController.swift in Sources */,

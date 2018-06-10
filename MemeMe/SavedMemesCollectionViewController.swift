@@ -12,6 +12,11 @@ class SavedMemesCollectionViewController: UICollectionViewController {
     
     @IBOutlet weak var createNewMemeButton: UIBarButtonItem!
     
+<<<<<<< Updated upstream
+=======
+    private var selectedMeme: Meme?
+
+>>>>>>> Stashed changes
     
     
     // MARK: View Lifecycle
@@ -19,11 +24,27 @@ class SavedMemesCollectionViewController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+<<<<<<< Updated upstream
         collectionView?.reloadData()
     }
 
     
     
+=======
+        print(SavedMemes.allSavedMemes.count)
+        
+        
+        
+        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.collectionView?.reloadData()
+    }
+
+>>>>>>> Stashed changes
     // MARK: - Navigation
     
     @IBAction func createNewMeme(_ sender: UIBarButtonItem) {
